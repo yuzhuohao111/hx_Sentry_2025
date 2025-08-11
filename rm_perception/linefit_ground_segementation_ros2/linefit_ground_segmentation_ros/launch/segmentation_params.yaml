@@ -1,0 +1,32 @@
+ground_segmentation:
+  ros__parameters:
+    n_threads: 4                # 要使用的线程数。
+    
+    r_min: 0.35                 # 最小点距离
+    r_max: 20                   # 最大点距离
+    n_bins: 140                 # 径向箱数。
+    n_segments: 360             # 地面分割数量
+
+    max_dist_to_line: 0.15       # 地面分割最大距离
+
+    # sensor_height: 0.23       # 传感器距离地面的高度。这个参数用于确定传感器的安装高度，以便更准确地计算点到地面的垂直距离。
+    sensor_height: 0.2        # 传感器距离地面的高度。这个参数用于确定传感器的安装高度，以便更准确地计算点到地面的垂直距离。
+    min_slope: -1.5              # 地面线的最小坡度。这个参数用于限制地面线的最小坡度，以避免将过于平坦的区域误认为是地面
+    max_slope: 1.5             # 地面线的最大坡度。这个参数用于限制地面线的最大坡度，以避免将过于陡峭的区域误认为是地面
+    max_fit_error: 0.05        # 线拟合过程中允许的最大误差。这个参数用于控制线拟合过程中允许的最大误差，以确保拟合的准确性
+    long_threshold: 1.0         # 在被认为相距较远的点之间的距离阈值。超过这个阈值的点被认为相距较远。
+    max_long_height: 0.15       # 长线中与前一个点的最大高度变化。这个参数用于限制长线中相邻点之间的最大高度变化
+    max_start_height: 0.2       # 开始新线时与估计地面高度的最大差异。这个参数用于确定何时应该开始一个新的地面线，以避免将过于不连续的地面区域误认为是同一地面
+    line_search_angle: 0.8      # 在角度方向上搜索地面线的范围。这个参数用于确定搜索地面线时在角度方向上的搜索范围
+
+    gravity_aligned_frame: ""   # 与重力对齐的坐标系。如果设置为空，将使用传感器坐标系。这个参数用于指定一个坐标系，其z轴与重力方向对齐，以便更准确地进行地面分割
+ 
+    latch: false                # 是否锁定输出话题。如果设置为true，将锁定输出话题，否则将不锁定
+    visualize: false            # 是否可视化分割结果。如果设置为true，将可视化地面分割的结果，通常用于调试目的
+
+    # input_topic: "/livox/lidar/pointcloud"
+    input_topic: "/merged_cloud"
+    # input_topic: "/processed_cloud"
+    # input_topic: "/cloud_registered_body"
+    obstacle_output_topic: "/segmentation/obstacle"
+    ground_output_topic: "/segmentation/ground"

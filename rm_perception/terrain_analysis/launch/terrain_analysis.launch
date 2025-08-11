@@ -1,0 +1,61 @@
+<launch>
+
+  <node pkg="terrain_analysis" exec="terrainAnalysis" name="terrainAnalysis" output="screen">
+    <param name="scanVoxelSize" value="0.05" />  
+    <!-- 点云下采样 -->
+
+    <param name="decayTime" value="0.6" />
+    <!-- 点云时间差阈值 大于则不会被处理 -->
+
+    <param name="noDecayDis" value="0.0" />
+    <!-- # 点云距离阈值 小于该阈值不考虑时间差 -->
+
+    <param name="clearingDis" value="0.0" />
+    <!-- # 该距离外的点会被清除 -->
+
+    <param name="useSorting" value="true" />
+    <!-- # 这个参数开起来就能上坡了；如果 use_sorting,那么就以周围点中的分位点作为地面点，否则以最低点作为地面点；周围其余点相对于地面点的高度作为通过代价，所以对于坡面，有的点的代价是正，有的是负，就相互抵消了；不要与 consider_drop 同时开启，计算上会有冲突 -->
+    <param name="quantileZ" value="0.6" />
+    <!-- # useful if use_sorting is enabled. 坡度 -->
+    <param name="considerDrop" value="false" />
+    <!-- # 考虑凹下去的地面,开启则将相对于地面点的高度取绝对值 -->
+    <param name="limitGroundLift" value="false" />
+    <param name="maxGroundLift" value="0.3" />
+
+    <param name="clearDyObs" value="false" />
+    <!-- # 清除动态物体的话，有动态物体走过的地方就走不了了 -->
+
+    <param name="minDyObsDis" value="0.4" />
+    <!-- # 以下参数都是在 clear_dy_obs 的情况下才有用的 -->
+    <param name="minDyObsAngle" value="0.0" />
+    <param name="minDyObsRelZ" value="-0.3" />
+    <!-- // 动态障碍物相对车辆的最小高度（米） 低于此高度的点可能不被视为动态障碍物-->
+    <param name="absDyObsRelZThre" value="0.2" />
+    <param name="minDyObsVFOV" value="-28.0" />
+    <param name="maxDyObsVFOV" value="33.0" />
+    <param name="minDyObsPointNum" value="1" />
+
+    <!-- // 无数据区域处理参数 -->
+    <param name="noDataObstacle" value="false" />
+    <!-- 是否将无数据区域视为障碍 -->
+    <param name="noDataBlockSkipNum" value="0" />
+    <param name="minBlockPointNum" value="10" />
+
+    <param name="vehicleHeight" value="0.5" />
+    <!-- # 小于车辆高度的点才会进行处理 -->
+
+    <!-- 体素更新阈值 -->
+    <param name="voxelPointUpdateThre" value="100" />
+    <param name="voxelTimeUpdateThre" value="1.0" />
+
+    <param name="minRelZ" value="-1.0" />
+     <!-- # min_rel_z 以及 max_rel_z 限制了有效点云点的Z值范围，用于对天花板和地板进行处理 -->
+
+    <param name="maxRelZ" value="2.0" />
+
+    <param name="disRatioZ" value="0.3" />
+    <!-- # Z 值的最大最小范围由这两个值决定，但是并不等于这两个值，是有一个比例关系的，距离机器人越远，限定范围就越大，这其中考虑了坡度 -->
+
+  </node>
+
+</launch>

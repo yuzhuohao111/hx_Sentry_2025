@@ -1,0 +1,73 @@
+/**:
+    ros__parameters:
+        use_imu_as_input: False                             # 是否使用IMU作为Point-LIO的输入，False表示不使用，True表示使用
+        prop_at_freq_of_imu: True                           # 是否在IMU的频率下进行传播，True表示是
+        check_satu: True                                    # 是否检查IMU数据的饱和状态，True表示检查
+        init_map_size: 1000                                   # 初始地图大小，单位为米
+        point_filter_num: 3                                 # 点云滤波的数量，可选值为4或3
+        space_down_sample: True                            # 是否进行空间下采样，True表示进行
+        filter_size_surf: 0.2                               # 表面滤波的尺寸，可选值为0.5, 0.3, 0.2, 0.15, 0.1
+        filter_size_map: 0.2                                # 地图滤波的尺寸，可选值为0.5, 0.3, 0.15, 0.1
+        ivox_nearby_type: 6                                 # iVox附近的类型，可选值为0, 6, 18, 26
+        runtime_pos_log_enable: False                       # 是否启用运行时位置日志，False表示不启用
+
+        common:
+            lid_topic: "merged_custom"                        # LiDAR数据的ROS话题名称
+            imu_topic: "/imu/data"                         # IMU数据的ROS话题名称
+            con_frame: False                                # 是否需要将多个LiDAR帧合并为一个帧，True表示需要
+            con_frame_num: 1                                # 合并的帧数量
+            cut_frame: False                                # 是否需要将一个LiDAR帧切割为多个子帧，True表示需要
+            cut_frame_time_interval: 0.1                    # 切割帧的时间间隔，应为LiDAR频率的整数分之一
+            time_diff_lidar_to_imu: 0.0                     # LiDAR和IMU之间的时间偏移，通常由其他算法（如LI-Init）校准
+
+        prior_pcd:
+            enable: False                                   # 是否启用先验点云地图，False表示不启用
+            prior_pcd_map_path: "src/rm_nav_bringup/pcd/blue.pcd"                          # 先验点云地图的路径
+            init_pose: [ 0.0, 0.0, 0.0 ]                   # 初始姿态，单位为米
+
+        preprocess:
+            lidar_type: 1                                   # LiDAR类型，1表示Livox系列LiDAR，2表示Velodyne LiDAR，3表示Ouster LiDAR
+            scan_line: 4                                    # 扫描线数量
+            timestamp_unit: 3                               # 时间戳单位，0表示秒，1表示毫秒，2表示微秒，3表示纳秒
+            blind: 0.4                                      # 盲区距离，单位为米
+
+        mapping:
+            imu_en: True                                    # 是否启用IMU，True表示启用
+            extrinsic_est_en: False                         # 是否启用外参估计，False表示不启用，适用于剧烈运动场景
+            imu_time_inte: 0.005                            # IMU的时间间隔，等于1/IMU频率
+            lidar_time_inte: 0.05                            # LiDAR的时间间隔
+            satu_acc: 4.0                                   # IMU加速度的饱和值，与单位无关
+            satu_gyro: 35.0                                 # IMU角速度的饱和值，与单位无关
+            acc_norm: 1.0                                   # IMU加速度的单位，1.0表示g，9.81表示m/s^2
+            lidar_meas_cov: 0.01                            # LiDAR测量协方差
+            acc_cov_output: 500.0                           # 加速度输出协方差
+            gyr_cov_output: 1000.0                         # 角速度输出协方差
+            b_acc_cov: 0.0001                               # 加速度偏差协方差
+            b_gyr_cov: 0.0001                               # 角速度偏差协方差
+            imu_meas_acc_cov: 0.1                          # IMU加速度测量协方差
+            imu_meas_omg_cov: 0.1                          # IMU角速度测量协方差
+            gyr_cov_input: 0.1                             # IMU作为输入模型时的角速度协方差
+            acc_cov_input: 0.1                              # IMU作为输入模型时的加速度协方差
+            plane_thr: 0.1                                  # 平面判断的阈值，越小表示平面越平坦
+            match_s: 81.0                                   # 匹配分数
+            ivox_grid_resolution: 1.0                      # iVox网格分辨率
+            gravity: [ 0.0, 0.0, -9.810 ]                   # 重力向量，单位为m/s^2
+            gravity_init: [ 0.0, 0.0, -9.810 ]              # 初始重力向量，单位为m/s^2
+            # extrinsic_T: [ 0.0, 0.0, 0.0 ]
+            extrinsic_T: [ -0.011, -0.02329, 0.04412 ]      # 外参平移向量
+            extrinsic_R: [ 1.0, 0.0, 0.0,
+                           0.0, 1.0, 0.0,
+                           0.0, 0.0, 1.0 ]                  # 外参旋转矩阵
+
+        odometry:
+            publish_odometry_without_downsample: False      # 是否在不进行下采样的情况下发布里程计，False表示不发布
+
+        publish:
+            path_en: True                                   # 是否启用路径输出，True表示启用
+            scan_publish_en: True                           # 是否启用点云输出，True表示启用
+            scan_bodyframe_pub_en: True                    # 是否在IMU体坐标系下发布点云，False表示不发布
+            tf_send_en: True                                # 是否发送从'camera_init'到'aft_mapped'的变换，True表示发送
+
+        pcd_save:
+            pcd_save_en: True                               # 是否启用点云保存，True表示启用
+            interval: -1                                    # 每个pcd文件中保存的LiDAR帧数，-1表示所有帧保存在一个文件中，可能导致内存崩溃

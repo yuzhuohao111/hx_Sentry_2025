@@ -1,0 +1,27 @@
+[0m** WARNING ** io features related to pcap will be disabled[0m
+[0m/usr/include/apr-1.0[0m
+[0mapr-1[0m
+[0m/usr/local/lib/liblivox_lidar_sdk_shared.so[0m
+In file included from [01m[K/home/rm/livox_ros_driver2_humble/src/src/driver_node.h:28[m[K,
+                 from [01m[K/home/rm/livox_ros_driver2_humble/src/src/driver_node.cpp:25[m[K:
+[01m[K/home/rm/livox_ros_driver2_humble/src/src/include/ros_headers.h:28:[m[K [01;35m[Kwarning: [m[K"BUILDING_ROS2" redefined
+   28 | #define BUILDING_ROS2
+      | 
+[01m[K<command-line>:[m[K [01;36m[Knote: [m[Kthis is the location of the previous definition
+In file included from [01m[K/home/rm/livox_ros_driver2_humble/src/src/driver_node.h:28[m[K,
+                 from [01m[K/home/rm/livox_ros_driver2_humble/src/src/livox_ros_driver2.cpp:32[m[K:
+[01m[K/home/rm/livox_ros_driver2_humble/src/src/include/ros_headers.h:28:[m[K [01;35m[Kwarning: [m[K"BUILDING_ROS2" redefined
+   28 | #define BUILDING_ROS2
+      | 
+[01m[K<command-line>:[m[K [01;36m[Knote: [m[Kthis is the location of the previous definition
+In file included from [01m[K/home/rm/livox_ros_driver2_humble/src/src/driver_node.h:28[m[K,
+                 from [01m[K/home/rm/livox_ros_driver2_humble/src/src/lddc.h:31[m[K,
+                 from [01m[K/home/rm/livox_ros_driver2_humble/src/src/lddc.cpp:25[m[K:
+[01m[K/home/rm/livox_ros_driver2_humble/src/src/include/ros_headers.h:28:[m[K [01;35m[Kwarning: [m[K"BUILDING_ROS2" redefined
+   28 | #define BUILDING_ROS2
+      | 
+[01m[K<command-line>:[m[K [01;36m[Knote: [m[Kthis is the location of the previous definition
+In file included from [01m[K/home/rm/livox_ros_driver2_humble/src/src/lds_lidar.cpp:47[m[K:
+[01m[K/home/rm/livox_ros_driver2_humble/src/src/comm/pub_handler.h:44:29:[m[K [01;35m[Kwarning: [m[K‘[01m[Klivox_ros::extrinsic_global[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+   44 | static ExtParameterDetailed [01;35m[Kextrinsic_global[m[K = {
+      |                             [01;35m[K^~~~~~~~~~~~~~~~[m[K
