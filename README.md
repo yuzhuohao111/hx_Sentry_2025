@@ -28,7 +28,7 @@
         └── small_gicp_relocalization       gicp重定位
     ├── rm_navigation                   # nav2的插件包 将nav2里面一些包进行了修改以及添加新的功能包
         ├── nav2_navfn_planner              修改成八邻域搜索
-        ├── nav2_planner                    修改成路径规划经过区域发标志位  主要是隧道区域
+        ├── nav2_planner                    
         ├── nav2_smac_planner               增加可视化 不太重要
         ├── pb_nav2_plugins                 恢复行为里面增加适应机器人坐标系的速度（适应不加虚拟坐标系下的） 然后修改搜索可通行区域不从机体中心搜索  206行  float r = 0.3f; 
         └── pb_omni_pid_pursuit_controller  pid控制器：增加自适应脱困 以及各个区域切不同的旋转pid转特定角度过隧道 并且有卡隧道多次进行换点 （初学者可以先读开源本来的代码 然后再结合我这个）
